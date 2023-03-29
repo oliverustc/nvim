@@ -9,3 +9,8 @@ require('plugin-config.telescope')
 require('plugin-config.dashboard')
 require('plugin-config.project')
 require('plugin-config.nvim-treesitter')
+require('lsp.setup')
+-- 内置LSP
+require("lsp.cmp")
+require("lsp.ui") -- 新增
+require('lsp.vimtex')
