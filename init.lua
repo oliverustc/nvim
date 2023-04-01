@@ -14,3 +14,4 @@ require('lsp.setup')
 require("lsp.cmp")
 require("lsp.ui") -- 新增
 require('lsp.vimtex')
+-- vim.cmd('source ~/.config/nvim/lua/plugin-config/vimtex.vim')
