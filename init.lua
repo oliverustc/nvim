@@ -12,6 +12,6 @@ require('plugin-config.nvim-treesitter')
 require('lsp.setup')
 -- 内置LSP
 require("lsp.cmp")
-require("lsp.ui") -- 新增
-require('lsp.vimtex')
+require("lsp.ui") 
+-- require('lsp.vimtex')
 -- vim.cmd('source ~/.config/nvim/lua/plugin-config/vimtex.vim')

@@ -14,10 +14,10 @@ map("n", "sc", "<C-w>c", opt)
 -- 关闭其他
 map("n", "so", "<C-w>o", opt)
 -- Alt + hjkl  窗口之间跳转
-map("n", "<A-h>", "<C-w>h", opt)
-map("n", "<A-j>", "<C-w>j", opt)
-map("n", "<A-k>", "<C-w>k", opt)
-map("n", "<A-l>", "<C-w>l", opt)
+map("n", "<C-h>", "<C-w>h", opt)
+map("n", "<C-j>", "<C-w>j", opt)
+map("n", "<C-k>", "<C-w>k", opt)
+map("n", "<C-l>", "<C-w>l", opt)
 
 
 -- 左右比例控制
@@ -62,7 +62,7 @@ map("v", "p", '"_dP', opt)
 
 -- 退出
 map("n", "q", ":q<CR>", opt)
-map("n", "w", ":w<CR>", opt)
+-- map("n", "w", ":w<CR>", opt)
 map("n", "qq", ":q!<CR>", opt)
 map("n", "Q", ":qa!<CR>", opt)
 
@@ -73,8 +73,17 @@ map("i", "<C-l>", "<ESC>A", opt)
 
 -- bufferline
 -- 左右Tab切换
-map("n", "<C-h>", ":BufferLineCyclePrev<CR>", opt)
-map("n", "<C-l>", ":BufferLineCycleNext<CR>", opt)
+map("n", "<A-h>", ":BufferLineCyclePrev<CR>", opt)
+map("n", "<A-l>", ":BufferLineCycleNext<CR>", opt)
+map("n", "<A-1>", ":BufferLineGoToBuffer 1<CR>", opt)
+map("n", "<A-2>", ":BufferLineGoToBuffer 2<CR>", opt)
+map("n", "<A-3>", ":BufferLineGoToBuffer 3<CR>", opt)
+map("n", "<A-4>", ":BufferLineGoToBuffer 4<CR>", opt)
+map("n", "<A-5>", ":BufferLineGoToBuffer 5<CR>", opt)
+map("n", "<A-6>", ":BufferLineGoToBuffer 6<CR>", opt)
+map("n", "<A-7>", ":BufferLineGoToBuffer 7<CR>", opt)
+
+
 -- 关闭
 --"moll/vim-bbye"
 map("n", "<C-w>", ":Bdelete!<CR>", opt)

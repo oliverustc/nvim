@@ -1,13 +1,13 @@
-local packer = require('packer')
+local packer = require("packer")
 packer.startup({
   function(use)
-    use('wbthomason/packer.nvim')
+    use("wbthomason/packer.nvim")
     use("folke/tokyonight.nvim")
     use({ "kyazdani42/nvim-tree.lua", requires = "kyazdani42/nvim-web-devicons" })
     use({ "akinsho/bufferline.nvim", requires = { "kyazdani42/nvim-web-devicons", "moll/vim-bbye" } })
     use({ "nvim-lualine/lualine.nvim", requires = { "kyazdani42/nvim-web-devicons" } })
     use("arkav/lualine-lsp-progress")
-    use { 'nvim-telescope/telescope.nvim', requires = { "nvim-lua/plenary.nvim" } }
+    use { "nvim-telescope/telescope.nvim", requires = { "nvim-lua/plenary.nvim" } }
     use("glepnir/dashboard-nvim")
     use("ahmedkhalf/project.nvim")
     use({ "nvim-treesitter/nvim-treesitter", run = ":tsupdate" })
@@ -22,14 +22,14 @@ packer.startup({
     -- 补全源
     use("hrsh7th/cmp-vsnip")
     use("hrsh7th/cmp-nvim-lsp") -- { name = nvim_lsp }
-    use("hrsh7th/cmp-buffer")   -- { name = 'buffer' },
-    use("hrsh7th/cmp-path")     -- { name = 'path' }
-    use("hrsh7th/cmp-cmdline")  -- { name = 'cmdline' }
+    use("hrsh7th/cmp-buffer")   -- { name = "buffer" },
+    use("hrsh7th/cmp-path")     -- { name = "path" }
+    use("hrsh7th/cmp-cmdline")  -- { name = "cmdline" }
 
     -- 常见编程语言代码段
     use("rafamadriz/friendly-snippets")
     use("onsails/lspkind-nvim")
-    use('lervag/vimtex')
+    use("lervag/vimtex")
   end,
   config = {
     display = {
