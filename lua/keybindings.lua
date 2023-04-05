@@ -1,5 +1,5 @@
-vim.g.mapleader = " "
-vim.g.maplocalleader = " "
+vim.g.mapleader = "\\"
+vim.g.maplocalleader = ","
 local map = vim.api.nvim_set_keymap
 -- 复用 opt 参数
 local opt = { noremap = true, silent = true }
@@ -8,12 +8,23 @@ local opt = { noremap = true, silent = true }
 map("n", "<leader>w", ":w<CR>", opt)
 map("n", "<leader>q", ":q<CR>", opt)
 map("n", "<leader>x", ":x<CR>", opt)
+
 map("i", "<leader>w", "<Esc>:w<CR>a", opt)
 map("i", "<leader>q", "<Esc>:q<CR>", opt)
 map("i", "<leader>x", "<Esc>:x<CR>", opt)
 
-
-
+map("i", "<C-i>", "<C-o>I", opt)     -- insert: ctrl+i 移动到行首
+map("i", "<C-a>", "<C-o>A", opt)     -- insert：ctrl+a 移动到行尾
+map("i", "<C-w>", "<C-o>w", opt)     -- insert：ctrl+w 移动到下一个单词
+map("i", "<C-b>", "<C-o>b", opt)     -- insert：ctrl+b 移动到下一个单词
+map("i", "<C-h>", "<C-o>h", opt)     -- insert：ctrl+h 向左移动
+map("i", "<C-l>", "<C-o>l", opt)     -- insert：ctrl+l 向右移动
+map("i", "<C-j>", "<C-o>j", opt)     -- insert: ctrl+j 移动到下一行
+map("i", "<C-k>", "<C-o>k", opt)     -- insert: ctrl+k 移动到上一行
+map("i", "<C-d>", "<C-o>5j", opt)    -- insert: ctrl+d 移动到下5行
+map("i", "<C-u>", "<C-o>5k", opt)    -- insert: ctrl+u 移动到上5行
+map("i", "jj",    "<Esc>", opt)
+map("i", "<Tab>", "<Esc>", opt)
 -- 取消 s 默认功能
 map("n", "s", "", opt)
 -- windows 分屏快捷键
@@ -24,11 +35,10 @@ map("n", "sc", "<C-w>c", opt)
 -- 关闭其他
 map("n", "so", "<C-w>o", opt)
 -- Alt + hjkl  窗口之间跳转
-map("n", "<C-h>", "<C-w>h", opt)
-map("n", "<C-j>", "<C-w>j", opt)
-map("n", "<C-k>", "<C-w>k", opt)
-map("n", "<C-l>", "<C-w>l", opt)
-
+map("n", "<A-h>", "<C-w>h", opt)
+map("n", "<A-j>", "<C-w>j", opt)
+map("n", "<A-k>", "<C-w>k", opt)
+map("n", "<A-l>", "<C-w>l", opt)
 
 -- 左右比例控制
 map("n", "<C-Left>", ":vertical resize -2<CR>", opt)
@@ -44,8 +54,8 @@ map("n", "<C-Up>", ":resize -2<CR>", opt)
 map("n", "s=", "<C-w>=", opt)
 
 -- Terminal相关
-map("n", "<leader>t", ":sp | terminal<CR>", opt)
-map("n", "<leader>vt", ":vsp | terminal<CR>", opt)
+map("n", "<leader>t", ":sp | terminal<CR>i", opt)
+map("n", "<leader>vt", ":vsp | terminal<CR>i", opt)
 map("t", "<Esc>", "<C-\\><C-n>", opt)
 map("t", "<A-h>", [[ <C-\><C-N><C-w>h ]], opt)
 map("t", "<A-j>", [[ <C-\><C-N><C-w>j ]], opt)
@@ -56,30 +66,20 @@ map("t", "<A-l>", [[ <C-\><C-N><C-w>l ]], opt)
 map("v", "<", "<gv", opt)
 map("v", ">", ">gv", opt)
 -- 上下移动选中文本
-map("v", "J", ":move '>+1<CR>gv-gv", opt)
 map("v", "K", ":move '<-2<CR>gv-gv", opt)
+map("v", "J", ":move '>+1<CR>gv-gv", opt)
 
--- 上下滚动浏览
--- map("n", "<C-j>", "5j", opt)
--- map("n", "<C-k>", "5k", opt)
--- ctrl u / ctrl + d  只移动9行，默认移动半屏
+-- ctrl u / ctrl + d  移动10行，默认移动半屏
 map("n", "<C-u>", "10k", opt)
 map("n", "<C-d>", "10j", opt)
-
 
 -- 在visual 模式里粘贴不要复制
 map("v", "p", '"_dP', opt)
 
-
--- insert 模式下，跳到行首行尾
-map("i", "<C-h>", "<ESC>I", opt)
-map("i", "<C-l>", "<ESC>A", opt)
-
-
 -- bufferline
 -- 左右Tab切换
-map("n", "<A-h>", ":BufferLineCyclePrev<CR>", opt)
-map("n", "<A-l>", ":BufferLineCycleNext<CR>", opt)
+map("n", "<leader>k", ":BufferLineCyclePrev<CR>", opt)
+map("n", "<leader>j", ":BufferLineCycleNext<CR>", opt)
 map("n", "<A-1>", ":BufferLineGoToBuffer 1<CR>", opt)
 map("n", "<A-2>", ":BufferLineGoToBuffer 2<CR>", opt)
 map("n", "<A-3>", ":BufferLineGoToBuffer 3<CR>", opt)
@@ -87,7 +87,6 @@ map("n", "<A-4>", ":BufferLineGoToBuffer 4<CR>", opt)
 map("n", "<A-5>", ":BufferLineGoToBuffer 5<CR>", opt)
 map("n", "<A-6>", ":BufferLineGoToBuffer 6<CR>", opt)
 map("n", "<A-7>", ":BufferLineGoToBuffer 7<CR>", opt)
-
 
 -- 关闭
 --"moll/vim-bbye"
@@ -128,7 +127,7 @@ pluginKeys.telescopeList = {
 
 -- nvim-tree
 -- alt + m 键打开关闭tree
-map("n", "<C-t>", ":NvimTreeToggle<CR>", opt)
+map("n", "<C-n>", ":NvimTreeToggle<CR>", opt)
 -- 列表快捷键
 pluginKeys.nvimTreeList = {
   -- 打开文件或文件夹
