@@ -1,29 +1,18 @@
-let g:tex_flavor = 'latex' 
+" 使用 LaTeX 引擎
+let g:tex_flavor = 'latex'
+
+" 禁用 Quickfix 模式
 let g:vimtex_quickfix_mode = 0
-" This is necessary for VimTeX to load properly. The "indent" is optional.
-" Note that most plugin managers will do this automatically.
+
+" 启用自动缩进和插件支持
 filetype plugin indent on
 
-" This enables Vim's and neovim's syntax-related features. Without this, some
-" VimTeX features will not work (see ":help vimtex-requirements" for more
-" info).
-syntax enable
-
-" Viewer options: One may configure the viewer either by specifying a built-in
-" viewer method:
+" 使用 Zathura PDF 查看器打开 PDF 文件
 let g:vimtex_view_method = 'zathura'
-
-" Or with a generic interface:
 let g:vimtex_view_general_viewer = 'zathura'
 let g:vimtex_view_general_options = '--unique file:@pdf\#src:@line@tex'
 
-" VimTeX uses latexmk as the default compiler backend. If you use it, which is
-" strongly recommended, you probably don't need to configure anything. If you
-" want another compiler backend, you can change it as follows. The list of
-" supported backends and further explanation is provided in the documentation,
-" see ":help vimtex-compiler".
-let g:vimtex_compiler_method = 'latexrun'
-
-" Most VimTeX mappings rely on localleader and this can be changed with the
-" following line. The default is usually fine and is the symbol "\".
-let maplocalleader = ","
+" 设置编译器选项
+let g:vimtex_compiler_options = {'-parser': 'tree-sitter'}
+let g:vimtex_compiler_method = 'latexmk'
+let g:vimtex_compiler_verbose = 1

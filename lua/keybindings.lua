@@ -4,6 +4,16 @@ local map = vim.api.nvim_set_keymap
 -- 复用 opt 参数
 local opt = { noremap = true, silent = true }
 
+--  文件保存
+map("n", "<leader>w", ":w<CR>", opt)
+map("n", "<leader>q", ":q<CR>", opt)
+map("n", "<leader>x", ":x<CR>", opt)
+map("i", "<leader>w", "<Esc>:w<CR>a", opt)
+map("i", "<leader>q", "<Esc>:q<CR>", opt)
+map("i", "<leader>x", "<Esc>:x<CR>", opt)
+
+
+
 -- 取消 s 默认功能
 map("n", "s", "", opt)
 -- windows 分屏快捷键
@@ -50,8 +60,8 @@ map("v", "J", ":move '>+1<CR>gv-gv", opt)
 map("v", "K", ":move '<-2<CR>gv-gv", opt)
 
 -- 上下滚动浏览
-map("n", "<C-j>", "5j", opt)
-map("n", "<C-k>", "5k", opt)
+-- map("n", "<C-j>", "5j", opt)
+-- map("n", "<C-k>", "5k", opt)
 -- ctrl u / ctrl + d  只移动9行，默认移动半屏
 map("n", "<C-u>", "10k", opt)
 map("n", "<C-d>", "10j", opt)
@@ -60,11 +70,6 @@ map("n", "<C-d>", "10j", opt)
 -- 在visual 模式里粘贴不要复制
 map("v", "p", '"_dP', opt)
 
--- 退出
-map("n", "q", ":q<CR>", opt)
--- map("n", "w", ":w<CR>", opt)
-map("n", "qq", ":q!<CR>", opt)
-map("n", "Q", ":qa!<CR>", opt)
 
 -- insert 模式下，跳到行首行尾
 map("i", "<C-h>", "<ESC>I", opt)

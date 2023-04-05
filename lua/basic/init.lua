@@ -12,7 +12,7 @@ vim.wo.cursorline = true
 -- 显示左侧图标指示列
 vim.wo.signcolumn = "yes"
 -- 右侧参考线，超过表示代码太长了，考虑换行
-vim.wo.colorcolumn = "150"
+-- vim.wo.colorcolumn = "150"
 -- 缩进2个空格等于一个Tab
 vim.o.tabstop = 2
 vim.bo.tabstop = 2
@@ -41,7 +41,7 @@ vim.o.cmdheight = 2
 vim.o.autoread = true
 vim.bo.autoread = true
 -- 禁止折行
-vim.wo.wrap = false
+vim.wo.wrap = true
 -- 光标在行首尾时<Left><Right>可以跳到下一行
 vim.o.whichwrap = '<,>,[,]'
 -- 允许隐藏被修改过的buffer
@@ -78,3 +78,5 @@ vim.o.pumheight = 10
 vim.o.showtabline = 2
 -- 使用增强状态栏插件后不再需要 vim 的模式提示
 vim.o.showmode = false
+
+vim.cmd('set clipboard+=unnamedplus')
