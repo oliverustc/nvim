@@ -4,15 +4,24 @@ local map = vim.api.nvim_set_keymap
 -- 复用 opt 参数
 local opt = { noremap = true, silent = true }
 
+
+-- Normal 模式下键位基本设置
 --  文件保存
 map("n", "<leader>w", ":w<CR>", opt)
 map("n", "<leader>q", ":q<CR>", opt)
 map("n", "<leader>x", ":x<CR>", opt)
+-- 光标移动
+map("n", "<C-j>", "5j", opt)         -- normal: ctrl+j 向下移动5行
+map("n", "<C-k>", "5k", opt)         -- normal: ctrl+k 向上移动5行
+map("n", "<C-u>", "10k", opt)        -- normal: ctrl+u 向上移动10行
+map("n", "<C-d>", "10j", opt)        -- normal: ctrl+d 向下移动10行
 
+-- Insert模式下键位基本设置
+-- 文件保存
 map("i", "<leader>w", "<Esc>:w<CR>a", opt)
 map("i", "<leader>q", "<Esc>:q<CR>", opt)
 map("i", "<leader>x", "<Esc>:x<CR>", opt)
-
+-- 光标移动
 map("i", "<C-i>", "<C-o>I", opt)     -- insert: ctrl+i 移动到行首
 map("i", "<C-a>", "<C-o>A", opt)     -- insert：ctrl+a 移动到行尾
 map("i", "<C-w>", "<C-o>w", opt)     -- insert：ctrl+w 移动到下一个单词
@@ -57,6 +66,8 @@ map("n", "s=", "<C-w>=", opt)
 map("n", "<leader>t", ":sp | terminal<CR>i", opt)
 map("n", "<leader>vt", ":vsp | terminal<CR>i", opt)
 map("t", "<Esc>", "<C-\\><C-n>", opt)
+map("t", "jj", "<C-\\><C-n>", opt)
+map("t", "jk", "<C-\\><C-n><C-w>c", opt)
 map("t", "<A-h>", [[ <C-\><C-N><C-w>h ]], opt)
 map("t", "<A-j>", [[ <C-\><C-N><C-w>j ]], opt)
 map("t", "<A-k>", [[ <C-\><C-N><C-w>k ]], opt)
@@ -68,10 +79,6 @@ map("v", ">", ">gv", opt)
 -- 上下移动选中文本
 map("v", "K", ":move '<-2<CR>gv-gv", opt)
 map("v", "J", ":move '>+1<CR>gv-gv", opt)
-
--- ctrl u / ctrl + d  移动10行，默认移动半屏
-map("n", "<C-u>", "10k", opt)
-map("n", "<C-d>", "10j", opt)
 
 -- 在visual 模式里粘贴不要复制
 map("v", "p", '"_dP', opt)
