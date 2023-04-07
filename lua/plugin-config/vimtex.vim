@@ -12,54 +12,51 @@ let g:vimtex_quickfix_mode = 0
 " 启用自动缩进和插件支持
 filetype plugin indent on
 
+" 激活 vimtex 插件
+let g:vimtex_enabled = 1
 
-if !exists('g:loaded_vimtex')
-  let g:loaded_vimtex = 1
+" 设置默认编译器为 latexmk，并启用连续模式
+let g:vimtex_compiler_latexmk = {
+      \ 'backend' : 'nvim',
+      \ 'background' : 1,
+      \ 'build_dir' : '',
+      \ 'callback' : 1,
+      \ 'continuous' : 1,
+      \ 'executable' : 'latexmk',
+      \ 'options' : [
+      \   '-verbose',
+      \   '-file-line-error',
+      \   '-synctex=1',
+      \   '-interaction=nonstopmode',
+      \ ],
+      \}
 
-  " 设置编译器序列和编译选项
-  function! s:SetCompiler() abort
-    if expand('%:t') ==# 'paper.tex'
-      let g:vimtex_compiler_engine = 'pdflatex'
-      let g:vimtex_compiler_options = {
-            \ '-interaction': 'nonstopmode',
-            \ '-file-line-error': '',
-            \ '-synctex': '1',
-            \ '-shell-escape': '',
-            \ '-bibtex': '',
-          \ }
-      let g:vimtex_bibtex_process = 2
-      let g:vimtex_compiler_args = ['-pdf', '-pvc', '-pvw']
-    else
-      let g:vimtex_compiler_engine = 'xelatex'
-      let g:vimtex_compiler_options = {
-            \ '-interaction': 'nonstopmode',
-            \ '-file-line-error': '',
-            \ '-synctex': '1',
-            \ '-shell-escape': '',
-          \ }
-      let g:vimtex_pdflatex_build_command = 'latexmk -pdf -xelatex -synctex=1 -interaction=nonstopmode -file-line-error %O %S'
-      let g:vimtex_view_method = 'zathura'
-      let g:vimtex_view_options = {
-            \ '--fork': '',
-            \ '--synctex-forward': '%n:0:%b',
-            \ '--unique': '',
-            \ '--preserve-window': '',
-          \ }
-      let g:vimtex_automatic_view = 1
-    endif
-  endfunction
+" 定义paper的编译顺序
+let g:vimtex_compiler_latexmk_eng = deepcopy(g:vimtex_compiler_latexmk)
+let g:vimtex_compiler_latexmk_eng['options'] += ['-pdflatex=pdflatex']
 
-  " 根据文件类型自动选择编译器序列和编译选项
-  let g:vimtex_compiler_selectors = [
-        \ { 'is_file': 'ppt.tex', 'action': 'call <SID>SetCompiler()' },
-        \ { 'is_file': 'paper.tex', 'action': 'call <SID>SetCompiler()' },
-      \ ]
+" 定义ppt的编译顺序
+let g:vimtex_compiler_latexmk_chn = deepcopy(g:vimtex_compiler_latexmk)
+let g:vimtex_compiler_latexmk_chn['options'] += ['-xelatex=xelatex']
 
-  " 自动切换为 zathura 前端
-  let g:vimtex_automatic_view = 1
+" 定义编译paper的函数
+function! CompilePaper()
+  let l:current_options = g:vimtex_compiler_latexmk['options']
+  let g:vimtex_compiler_latexmk['options'] = g:vimtex_compiler_latexmk_eng['options']
+  call vimtex#compiler#compile()
+  let g:vimtex_compiler_latexmk['options'] = l:current_options
+endfunction
 
-  " 快捷键
-  let g:tex_flavor = 'latex'
-  nnoremap <Leader>l :VimtexCompile<CR>
-  nnoremap <Leader>v :VimtexView<CR>
-endif
+" 定义编译ppt的函数
+function! CompilePPT()
+  let l:current_options = g:vimtex_compiler_latexmk['options']
+  let g:vimtex_compiler_latexmk['options'] = g:vimtex_compiler_latexmk_chn['options']
+  call vimtex#compiler#compile()
+  let g:vimtex_compiler_latexmk['options'] = l:current_options
+endfunction
+
+" 为paper绑定快捷键 <leader>ll
+nnoremap <silent> <leader>ll :call CompilePaper()<CR>
+
+" 为ppt绑定快捷键 <leader>lp
+nnoremap <silent> <leader>lp :call CompilePPT()<CR>
