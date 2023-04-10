@@ -30,6 +30,7 @@ packer.startup({
     use("rafamadriz/friendly-snippets")
     use("onsails/lspkind-nvim")
     use("lervag/vimtex")
+    use("mg979/vim-visual-multi")
   end,
   config = {
     display = {

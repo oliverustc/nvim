@@ -33,7 +33,6 @@ map("i", "<C-k>", "<C-o>k", opt)     -- insert: ctrl+k 移动到上一行
 map("i", "<C-d>", "<C-o>5j", opt)    -- insert: ctrl+d 移动到下5行
 map("i", "<C-u>", "<C-o>5k", opt)    -- insert: ctrl+u 移动到上5行
 map("i", "jj",    "<Esc>", opt)
-map("i", "<Tab>", "<Esc>", opt)
 -- 取消 s 默认功能
 map("n", "s", "", opt)
 -- windows 分屏快捷键
@@ -50,10 +49,10 @@ map("n", "<A-k>", "<C-w>k", opt)
 map("n", "<A-l>", "<C-w>l", opt)
 
 -- 左右比例控制
-map("n", "<C-Left>", ":vertical resize -2<CR>", opt)
-map("n", "<C-Right>", ":vertical resize +2<CR>", opt)
-map("n", "s,", ":vertical resize -20<CR>", opt)
-map("n", "s.", ":vertical resize +20<CR>", opt)
+map("n", "<C-Left>", ":vertical resize +2<CR>", opt)
+map("n", "<C-Right>", ":vertical resize -2<CR>", opt)
+map("n", "s,", ":vertical resize +20<CR>", opt)
+map("n", "s.", ":vertical resize -20<CR>", opt)
 -- 上下比例
 map("n", "sj", ":resize +10<CR>", opt)
 map("n", "sk", ":resize -10<CR>", opt)
@@ -108,6 +107,7 @@ map("n", "<C-p>", ":Telescope find_files<CR>", opt)
 -- 全局搜索
 map("n", "<C-f>", ":Telescope live_grep<CR>", opt)
 
+map("n", "<leader>c", ":nohl<CR>", opt)
 
 -- 插件快捷键
 local pluginKeys = {}
@@ -134,7 +134,7 @@ pluginKeys.telescopeList = {
 
 -- nvim-tree
 -- alt + m 键打开关闭tree
-map("n", "<C-n>", ":NvimTreeToggle<CR>", opt)
+map("n", "<leader>f", ":NvimTreeToggle<CR>", opt)
 -- 列表快捷键
 pluginKeys.nvimTreeList = {
   -- 打开文件或文件夹
