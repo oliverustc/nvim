@@ -4,7 +4,6 @@ local map = vim.api.nvim_set_keymap
 -- 复用 opt 参数
 local opt = { noremap = true, silent = true }
 
-
 -- Normal 模式下键位基本设置
 --  文件保存
 map("n", "<leader>w", ":w<CR>", opt)
@@ -32,7 +31,7 @@ map("i", "<C-j>", "<C-o>j", opt)     -- insert: ctrl+j 移动到下一行
 map("i", "<C-k>", "<C-o>k", opt)     -- insert: ctrl+k 移动到上一行
 map("i", "<C-d>", "<C-o>5j", opt)    -- insert: ctrl+d 移动到下5行
 map("i", "<C-u>", "<C-o>5k", opt)    -- insert: ctrl+u 移动到上5行
-map("i", "jj",    "<Esc>", opt)
+map("i", "jj",    "<Esc>:w<CR>", opt)
 -- 取消 s 默认功能
 map("n", "s", "", opt)
 -- windows 分屏快捷键
@@ -78,7 +77,6 @@ map("v", ">", ">gv", opt)
 -- 上下移动选中文本
 map("v", "K", ":move '<-2<CR>gv-gv", opt)
 map("v", "J", ":move '>+1<CR>gv-gv", opt)
-
 -- 在visual 模式里粘贴不要复制
 map("v", "p", '"_dP', opt)
 
